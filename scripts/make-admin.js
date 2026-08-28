@@ -8,10 +8,14 @@
 //   2)  gcloud auth application-default login    (opens browser, one time)
 //        — OR, if you don't have gcloud, set the project and use the key
 //          method instead (set-admin-claim.js).
-//   3)  node scripts/make-admin.js admin@amja.local
+//   3)  node scripts/make-admin.js <admin-email>
 // ─────────────────────────────────────────────────────────────
 const admin = require('firebase-admin');
-const email = process.argv[2] || 'admin@amja.local';
+const email = process.argv[2];
+if (!email) {
+  console.error('\nUsage: node scripts/make-admin.js <admin-email>\n');
+  process.exit(1);
+}
 
 admin.initializeApp({
   projectId: 'amjaa-travels',

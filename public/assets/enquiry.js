@@ -29,9 +29,12 @@ function wireEnquireLinks() {
   });
 }
 
+let linksWired = false;
 function init() {
-  wireEnquireLinks();
+  if (!linksWired) { wireEnquireLinks(); linksWired = true; }
   document.querySelectorAll('form[data-enquiry]').forEach(form => {
+    if (form.dataset.enqWired) return;
+    form.dataset.enqWired = '1';
     const category = form.getAttribute('data-enquiry') || 'general';
     const status = form.querySelector('.enq-status');
     const btn = form.querySelector('button[type="submit"]');
@@ -66,3 +69,5 @@ function init() {
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
 else init();
+// re-scan when detail pages / grids inject new forms
+document.addEventListener('amja:refresh', init);

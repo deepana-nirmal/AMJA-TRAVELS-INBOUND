@@ -33,7 +33,8 @@ service cloud.firestore {
         'fleet',
         'flights',
         'flight_destinations',
-        'international_hotels'
+        'international_hotels',
+        'destinations_inbound'
       ];
     }
 

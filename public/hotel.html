@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hotel — Amja Travels Inbound</title>
+<meta name="description" content="A hand-picked Sri Lanka hotel booked regularly by Amja Travels Inbound — location, facilities, photos and how to enquire." />
+<meta name="robots" content="index,follow" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/theme.css" />
+<script src="assets/config.js"></script>
+<noscript><style>.reveal{opacity:1!important;transform:none!important}#preloader{display:none!important}.skeleton{display:none!important}</style></noscript>
+</head>
+<body data-page="hotels" data-solid-header>
+
+<div id="preloader">
+  <div class="pre-mark"><svg viewBox="0 0 100 100" aria-hidden="true">
+    <circle class="pre-ring" cx="50" cy="50" r="42" /><circle class="pre-arc" cx="50" cy="50" r="42" />
+    <circle class="pre-sun" cx="50" cy="50" r="12" />
+    <g class="pre-ray"><line x1="50" y1="16" x2="50" y2="26"/><line x1="50" y1="74" x2="50" y2="84"/><line x1="16" y1="50" x2="26" y2="50"/><line x1="74" y1="50" x2="84" y2="50"/><line x1="26" y1="26" x2="33" y2="33"/><line x1="67" y1="67" x2="74" y2="74"/><line x1="74" y1="26" x2="67" y2="33"/><line x1="33" y1="67" x2="26" y2="74"/></g>
+  </svg></div>
+  <div class="pre-word">Amja Travels <span class="arm">Inbound</span></div>
+  <div class="pre-bar"><i></i></div>
+</div>
+
+<main id="detailRoot" style="padding-top:76px"></main>
+
+<script src="assets/partials.js"></script>
+<script src="assets/ui.js"></script>
+<script type="module" src="assets/enquiry.js"></script>
+<script type="module">
+  import { loadDetail, detailHTML, wireDetail, detailState, galleryOf, firstImage, esc } from './assets/render.js';
+  const root = document.getElementById('detailRoot');
+  const para = s => esc(s).split(/\n{1,}/).filter(Boolean).map(p => `<p>${p}</p>`).join('');
+  detailState(root, 'loading');
+  loadDetail('hotels', {
+    render(it) {
+      const gallery = galleryOf(it);
+      root.innerHTML = detailHTML({
+        crumbLabel: 'Hotels', crumbHref: 'hotels.html',
+        kicker: it.location || 'Sri Lanka',
+        title: it.name || 'Hotel',
+        lead: (it.description || '').split('\n')[0].slice(0, 190),
+        heroImg: firstImage(it),
+        descHTML: it.description ? para(it.description) : '',
+        chips: it.amenities || [],
+        videoUrl: it.video_url || '',
+        sideKicker: 'The essentials',
+        specs: [
+          ['Location', it.location],
+          ['Rating', it.rating],
+          ['Rates', it.price || 'On request']
+        ],
+        blocks: [
+          { h: 'Good to know', html: it.additional_info ? para(it.additional_info) : '' }
+        ],
+        bookingUrl: it.booking_url || '',
+        gallery,
+        enquiryCategory: 'hotels'
+      });
+      document.title = `${it.name} — ${it.location || 'Sri Lanka'} Hotel | Amja Travels Inbound`;
+      const md = document.querySelector('meta[name="description"]');
+      if (md && it.description) md.setAttribute('content', it.description.slice(0, 155));
+      wireDetail(root);
+      window.AMJAui && window.AMJAui.refresh();
+    },
+    notFound() { detailState(root, 'notfound'); window.AMJAui && window.AMJAui.refresh(); },
+    error() { detailState(root, 'error'); window.AMJAui && window.AMJAui.refresh(); }
+  });
+</script>
+</body>
+</html>

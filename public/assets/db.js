@@ -35,10 +35,11 @@ export async function saveItem(cat, data, id = null) {
   // keep only allowed fields
   const clean = {};
   c.fields.forEach(f => { if (data[f] !== undefined) clean[f] = data[f]; });
-  // normalize array fields (split on newlines/commas if a string given)
+  // normalize array fields — one entry per line (commas are kept, so
+  // itinerary lines and captions may contain them safely)
   (c.arrays || []).forEach(f => {
     if (typeof clean[f] === 'string') {
-      clean[f] = clean[f].split(/[\n,]/).map(s => s.trim()).filter(Boolean);
+      clean[f] = clean[f].split('\n').map(s => s.trim()).filter(Boolean);
     }
   });
   clean.updated_at = serverTimestamp();

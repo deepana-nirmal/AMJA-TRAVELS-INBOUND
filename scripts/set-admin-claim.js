@@ -3,7 +3,7 @@
 // Grants admin:true to a Firebase Auth user using a local
 // serviceAccountKey.json. Local only — never deployed.
 //
-//   node scripts/set-admin-claim.js admin@amja.local
+//   node scripts/set-admin-claim.js <admin-email>
 // ─────────────────────────────────────────────────────────────
 const path = require('path');
 const fs = require('fs');
@@ -26,7 +26,11 @@ try {
   process.exit(1);
 }
 
-const email = process.argv[2] || 'admin@amja.local';
+const email = process.argv[2];
+if (!email) {
+  console.error('\nUsage: node scripts/set-admin-claim.js <admin-email>\n');
+  process.exit(1);
+}
 const serviceAccount = require(keyPath);
 
 initializeApp({ credential: cert(serviceAccount) });
