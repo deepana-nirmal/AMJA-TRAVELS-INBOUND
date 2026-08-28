@@ -1,0 +1,61 @@
+rules_version = '2';
+
+// ─────────────────────────────────────────────────────────────
+// Firestore Security Rules — THIS IS THE BACKEND.
+// No server exists; these rules decide who can do what.
+//
+//   Catalog (tours, hotels, fleet, flights, hajj, umrah):
+//     • anyone may READ   (public website)
+//     • only ADMIN may WRITE (create/update/delete)
+//
+//   Enquiries:
+//     • anyone may CREATE a valid enquiry (the contact forms)
+//     • only ADMIN may READ / update / delete them
+//
+// "Admin" = a signed-in Firebase Auth user with custom claim admin:true.
+// ─────────────────────────────────────────────────────────────
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+
+    // ── Public catalog collections ──
+    function isCatalog(col) {
+      return col in [
+        'tour_packages_inbound',
+        'tour_packages_outbound',
+        'hajj_packages',
+        'umrah_packages',
+        'hotels',
+        'fleet',
+        'flights',
+        'flight_destinations',
+        'international_hotels'
+      ];
+    }
+
+    match /{col}/{docId} {
+      allow read:  if isCatalog(col);
+      allow write: if isCatalog(col) && isAdmin();
+    }
+
+    // ── Enquiries ──
+    function validEnquiry() {
+      return request.resource.data.name is string
+          && request.resource.data.name.size() > 0
+          && request.resource.data.phone is string
+          && request.resource.data.phone.size() > 0
+          && request.resource.data.category is string
+          && request.resource.data.read == false
+          && request.resource.data.handled == false;
+    }
+
+    match /enquiries/{id} {
+      allow create: if validEnquiry();
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}

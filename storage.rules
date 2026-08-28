@@ -1,0 +1,24 @@
+rules_version = '2';
+
+// ─────────────────────────────────────────────────────────────
+// Firebase Storage rules — for package/hotel/vehicle images.
+//   • anyone may READ  (images shown on the public site)
+//   • only ADMIN may WRITE (upload/replace/delete)
+// Files must be images and under 5 MB.
+// ─────────────────────────────────────────────────────────────
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+
+    match /images/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin()
+                   && request.resource.size < 5 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+    }
+  }
+}
