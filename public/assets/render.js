@@ -63,7 +63,7 @@ export function tourCard(it) {
 export function hotelCard(it) {
   return `<a class="card reveal" href="hotel.html?id=${encodeURIComponent(it.id)}">
     <div class="card-media">${img(firstImage(it), it.name)}
-      ${it.rating ? `<span class="tag">${esc(it.rating)}</span>` : ''}</div>
+      <span class="tag">Selected stay</span></div>
     <div class="card-body">
       <div class="kicker">${esc(it.location || 'Sri Lanka')}</div>
       <h3>${esc(it.name || 'Hotel')}</h3>

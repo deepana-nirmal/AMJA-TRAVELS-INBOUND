@@ -52,7 +52,7 @@
         '<a href="index.html#contact" class="btn btn-primary">Start planning &rarr;</a></div>' +
       '<div class="foot-grid">' +
         '<div><div class="brand" style="color:#fff"><span class="mark">Amja Travels</span><span class="arm">Inbound</span></div>' +
-          '<p style="margin-top:14px">The Sri Lanka ground-handling side of Amja Travels — private tours, hotels and chauffeur fleet, arranged from Colombo since 1998.</p>' +
+          '<p style="margin-top:14px">Private Sri Lanka journeys, hotels and chauffeur travel, planned locally from Colombo.</p>' +
           '<div class="foot-social">' +
             '<a href="https://www.facebook.com/amjatravels/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13 22v-8h3l.5-3.5H13V8.3c0-1 .3-1.7 1.7-1.7H17V3.5A24 24 0 0 0 14.6 3C12 3 10.3 4.6 10.3 7.6v2.9H7V14h3.3v8H13Z"/></svg></a>' +
             '<a href="https://www.youtube.com/channel/UCwWbAdW1H5Xb99yLWRk8tBA" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23 12s0-3.3-.4-4.9a2.5 2.5 0 0 0-1.8-1.8C19.2 5 12 5 12 5s-7.2 0-8.8.4A2.5 2.5 0 0 0 1.4 7.2C1 8.7 1 12 1 12s0 3.3.4 4.9a2.5 2.5 0 0 0 1.8 1.8C4.8 19 12 19 12 19s7.2 0 8.8-.4a2.5 2.5 0 0 0 1.8-1.8C23 15.3 23 12 23 12ZM9.8 15.2V8.8l6 3.2-6 3.2Z"/></svg></a>' +
@@ -66,7 +66,7 @@
           '<li><a data-cfg="phone" href="tel:+94112335657">+94 11 233 5657</a></li>' +
           '<li><a data-cfg="email" href="mailto:amjatrvl@sltnet.lk">amjatrvl@sltnet.lk</a></li>' +
           '<li data-cfg="hours">Monday – Saturday · 8:30 AM – 5:30 PM</li></ul>' +
-          '<div class="accred">IATA · TAASL · Civil Aviation Authority of Sri&nbsp;Lanka</div></div>' +
+          '<div class="accred">Direct local contact · Monday–Saturday</div></div>' +
         '<div><h4>Amja Travels</h4><div class="foot-arms" style="grid-template-columns:1fr">' +
           '<a href="index.html"><div class="t">Inbound</div><div class="d">You\'re here — travel into Sri Lanka</div></a>' +
           '<a data-outbound-link href="#"><div class="t">Outbound</div><div class="d">Holidays abroad, flights &amp; pilgrimage</div></a>' +

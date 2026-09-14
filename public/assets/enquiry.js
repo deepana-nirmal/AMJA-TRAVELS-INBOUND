@@ -54,10 +54,15 @@ function init() {
           name: data.name, phone: data.phone, email: data.email || '',
           message: data.message || '',
           item_title: data.item_title || '',
-          extra: {},
+          extra: {
+            travel_dates: data.travel_dates || '',
+            travellers: data.travellers || '',
+            experience_style: data.experience_style || '',
+            accommodation_style: data.accommodation_style || '',
+          },
         });
         form.reset();
-        if (status) { status.textContent = 'Thank you — we\'ll be in touch shortly.'; status.className = 'enq-status ok'; }
+        if (status) { status.textContent = 'Thank you — your enquiry is with our team. We\'ll follow up using the details you provided.'; status.className = 'enq-status ok'; }
       } catch (ex) {
         if (status) { status.textContent = 'Something went wrong. Please call us instead.'; status.className = 'enq-status err'; }
         console.error('enquiry failed:', ex);
